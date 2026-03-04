@@ -81,13 +81,7 @@
 				path: 'exam',
 				component: './QuestionBank/Exam',
 			},
-			{
-				// Route phụ để tạo đề thi mới (ẩn khỏi menu)
-				name: 'Tạo đề thi mới',
-				path: 'exam/create',
-				component: './QuestionBank/Exam/CreateExam',
-				hideInMenu: true,
-			}
+
 		],
 	},
 
