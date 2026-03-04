@@ -48,6 +48,48 @@
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
 	},
+	// --- BÀI 1 ---
+	{
+		path: '/rock-paper-scissors',
+		name: 'Oẳn Tù Tì',
+		component: './RockPaperScissors',
+		icon: 'TrophyOutlined',
+	},
+	// --- BÀI 2 ---
+	{
+		name: 'Ngân Hàng Câu Hỏi',
+		path: '/question-bank',
+		icon: 'BookOutlined',
+		routes: [
+			{
+				name: 'Khối kiến thức',
+				path: 'knowledge-block',
+				component: './QuestionBank/KnowledgeBlock',
+			},
+			{
+				name: 'Môn học',
+				path: 'subject',
+				component: './QuestionBank/Subject',
+			},
+			{
+				name: 'Quản lý Câu hỏi',
+				path: 'question',
+				component: './QuestionBank/Question',
+			},
+			{
+				name: 'Quản lý Đề thi',
+				path: 'exam',
+				component: './QuestionBank/Exam',
+			},
+			{
+				// Route phụ để tạo đề thi mới (ẩn khỏi menu)
+				name: 'Tạo đề thi mới',
+				path: 'exam/create',
+				component: './QuestionBank/Exam/CreateExam',
+				hideInMenu: true,
+			}
+		],
+	},
 
 	// DANH MUC HE THONG
 	// {
