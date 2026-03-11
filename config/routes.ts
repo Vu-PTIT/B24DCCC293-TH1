@@ -60,41 +60,13 @@ export default [
 		path: '/catalog',
 		name: 'Danh mục quản lý',
 		icon: 'AppstoreOutlined',
-		routes: [
-			{
-				path: '/catalog/services',
-				name: 'Dịch vụ',
-				component: './Catalog/Services',
-			},
-			{
-				path: '/catalog/staffs',
-				name: 'Nhân viên',
-				component: './Catalog/Staffs',
-			},
-			{
-				path: '/catalog/staffs/:id/schedule',
-				name: 'Chi tiết lịch làm việc',
-				component: './Catalog/Staffs/Schedule',
-				hideInMenu: true,
-			},
-		],
+		component: './Catalog',
 	},
 	{
 		path: '/appointments',
 		name: 'Quản lý lịch hẹn',
 		icon: 'CalendarOutlined',
-		routes: [
-			{
-				path: '/appointments/list',
-				name: 'Danh sách lịch hẹn',
-				component: './Appointments/List',
-			},
-			{
-				path: '/appointments/calendar',
-				name: 'Lịch trực quan',
-				component: './Appointments/CalendarView',
-			},
-		],
+		component: './Appointments',
 	},
 	{
 		path: '/reviews',
