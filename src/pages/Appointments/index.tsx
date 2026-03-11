@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import {
 	Button,
 	Card,
@@ -18,29 +18,11 @@ import {
 import type { ColumnsType } from 'antd/lib/table';
 import moment from 'moment';
 import type { Moment } from 'moment';
+import useNhanVienModel from '@/models/danhmuc/nhanvien';
+import useDichVuModel from '@/models/danhmuc/dichvu';
+import useLichHenModel from '@/models/danhmuc/lichhen';
 
 type AppointmentStatus = 'CHO_DUYET' | 'XAC_NHAN' | 'HOAN_THANH' | 'HUY';
-
-interface Employee {
-	id: string;
-	name: string;
-}
-
-interface Service {
-	id: string;
-	name: string;
-	durationMinutes: number;
-}
-
-interface Appointment {
-	id: string;
-	customerName: string;
-	employeeId: string;
-	serviceId: string;
-	startTime: string;
-	endTime: string;
-	status: AppointmentStatus;
-}
 
 interface AppointmentForm {
 	customerName: string;
@@ -49,19 +31,6 @@ interface AppointmentForm {
 	date: Moment;
 	time: Moment;
 }
-
-const employees: Employee[] = [
-	{ id: 'NV01', name: 'Nguyễn An' },
-	{ id: 'NV02', name: 'Trần Bình' },
-	{ id: 'NV03', name: 'Lê Cường' },
-];
-
-const services: Service[] = [
-	{ id: 'DV01', name: 'Cắt tóc', durationMinutes: 30 },
-	{ id: 'DV02', name: 'Spa cơ bản', durationMinutes: 60 },
-	{ id: 'DV03', name: 'Khám tổng quát', durationMinutes: 45 },
-	{ id: 'DV04', name: 'Sửa chữa thiết bị', durationMinutes: 90 },
-];
 
 const statusLabel: Record<AppointmentStatus, string> = {
 	CHO_DUYET: 'Chờ duyệt',
@@ -79,14 +48,22 @@ const statusColor: Record<AppointmentStatus, string> = {
 
 const AppointmentsPage: React.FC = () => {
 	const [form] = Form.useForm<AppointmentForm>();
-	const [appointments, setAppointments] = useState<Appointment[]>([]);
+	const { danhSach: danhSachNhanVien, getModel: getNhanVien } = useNhanVienModel();
+	const { danhSach: danhSachDichVu, getModel: getDichVu } = useDichVuModel();
+	const { danhSach: danhSachLichHen, getModel: getLichHen, postModel, putModel, loading } = useLichHenModel();
 
-	const employeeMap = useMemo(() => Object.fromEntries(employees.map((item) => [item.id, item.name])), []);
+	useEffect(() => {
+		getNhanVien();
+		getDichVu();
+		getLichHen();
+	}, []);
 
-	const serviceMap = useMemo(() => Object.fromEntries(services.map((item) => [item.id, item])), []);
+	const employeeMap = useMemo(() => Object.fromEntries(danhSachNhanVien.map((item) => [item._id || item.id, item.ten])), [danhSachNhanVien]);
+
+	const serviceMap = useMemo(() => Object.fromEntries(danhSachDichVu.map((item) => [item._id || item.id, item])), [danhSachDichVu]);
 
 	const isConflict = (employeeId: string, startTime: moment.Moment, endTime: moment.Moment) => {
-		return appointments.some((item) => {
+		return danhSachLichHen.some((item) => {
 			if (item.employeeId !== employeeId || item.status === 'HUY') {
 				return false;
 			}
@@ -98,7 +75,7 @@ const AppointmentsPage: React.FC = () => {
 		});
 	};
 
-	const handleCreateAppointment = (values: AppointmentForm) => {
+	const handleCreateAppointment = async (values: AppointmentForm) => {
 		const service = serviceMap[values.serviceId];
 		if (!service) {
 			message.error('Dịch vụ không hợp lệ.');
@@ -112,15 +89,14 @@ const AppointmentsPage: React.FC = () => {
 			.second(0)
 			.millisecond(0);
 
-		const endTime = startTime.clone().add(service.durationMinutes, 'minutes');
+		const endTime = startTime.clone().add(service.thoiGianThucHien, 'minutes');
 
 		if (isConflict(values.employeeId, startTime, endTime)) {
 			message.error('Lịch bị trùng với lịch đã có của nhân viên này.');
 			return;
 		}
 
-		const newAppointment: Appointment = {
-			id: `LH${Date.now()}`,
+		const newAppointment: LichHen.IRecord = {
 			customerName: values.customerName.trim(),
 			employeeId: values.employeeId,
 			serviceId: values.serviceId,
@@ -129,24 +105,31 @@ const AppointmentsPage: React.FC = () => {
 			status: 'CHO_DUYET',
 		};
 
-		setAppointments((prev) =>
-			[...prev, newAppointment].sort((a, b) => moment(a.startTime).valueOf() - moment(b.startTime).valueOf()),
-		);
-
-		form.resetFields();
-		message.success('Đặt lịch thành công.');
+		try {
+			await postModel(newAppointment);
+			form.resetFields();
+			message.success('Đặt lịch thành công.');
+		} catch (error) {
+			message.error('Có lỗi xảy ra khi đặt lịch.');
+		}
 	};
 
-	const handleStatusChange = (id: string, status: AppointmentStatus) => {
-		setAppointments((prev) => prev.map((item) => (item.id === id ? { ...item, status } : item)));
+	const handleStatusChange = async (id: string, status: AppointmentStatus) => {
+		try {
+			await putModel(id, { status });
+			message.success('Cập nhật trạng thái thành công.');
+		} catch (error) {
+			message.error('Lỗi khi cập nhật trạng thái.');
+		}
 	};
 
-	const columns: ColumnsType<Appointment> = [
+	const columns: ColumnsType<LichHen.IRecord> = [
 		{
 			title: 'Mã lịch',
-			dataIndex: 'id',
-			key: 'id',
+			dataIndex: '_id',
+			key: '_id',
 			width: 140,
+			render: (val, record) => val || record.id || '-',
 		},
 		{
 			title: 'Khách hàng',
@@ -165,7 +148,7 @@ const AppointmentsPage: React.FC = () => {
 					return '-';
 				}
 
-				return `${service.name} (${service.durationMinutes} phút)`;
+				return `${service.ten} (${service.thoiGianThucHien} phút)`;
 			},
 		},
 		{
@@ -196,7 +179,7 @@ const AppointmentsPage: React.FC = () => {
 					<Select<AppointmentStatus>
 						value={status}
 						style={{ width: 130 }}
-						onChange={(value) => handleStatusChange(record.id, value)}
+						onChange={(value) => handleStatusChange(record._id!, value)}
 						options={Object.entries(statusLabel).map(([value, label]) => ({
 							value: value as AppointmentStatus,
 							label,
@@ -234,9 +217,9 @@ const AppointmentsPage: React.FC = () => {
 							>
 								<Select
 									placeholder='Chọn dịch vụ'
-									options={services.map((item) => ({
-										value: item.id,
-										label: `${item.name} (${item.durationMinutes} phút)`,
+									options={danhSachDichVu.map((item) => ({
+										value: item._id || item.id,
+										label: `${item.ten} (${item.thoiGianThucHien} phút)`,
 									}))}
 								/>
 							</Form.Item>
@@ -250,9 +233,9 @@ const AppointmentsPage: React.FC = () => {
 							>
 								<Select
 									placeholder='Chọn nhân viên'
-									options={employees.map((item) => ({
-										value: item.id,
-										label: item.name,
+									options={danhSachNhanVien.map((item) => ({
+										value: item._id || item.id,
+										label: item.ten,
 									}))}
 								/>
 							</Form.Item>
@@ -277,7 +260,7 @@ const AppointmentsPage: React.FC = () => {
 						</Col>
 
 						<Col xs={24} md={8} style={{ display: 'flex', alignItems: 'end' }}>
-							<Button type='primary' htmlType='submit'>
+							<Button type='primary' htmlType='submit' loading={loading}>
 								Đặt lịch
 							</Button>
 						</Col>
@@ -289,10 +272,11 @@ const AppointmentsPage: React.FC = () => {
 				<Typography.Title level={4} style={{ marginTop: 0 }}>
 					Danh sách lịch hẹn
 				</Typography.Title>
-				<Table<Appointment>
-					rowKey='id'
+				<Table<LichHen.IRecord>
+					rowKey={(record) => record._id || record.id || ''}
 					columns={columns}
-					dataSource={appointments}
+					dataSource={danhSachLichHen}
+					loading={loading}
 					pagination={{ pageSize: 8 }}
 					locale={{ emptyText: 'Chưa có lịch hẹn nào.' }}
 					scroll={{ x: 1200 }}
