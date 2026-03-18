@@ -49,6 +49,13 @@
 		icon: 'OrderedListOutlined',
 	},
 
+	{
+		path: '/nguoi1-so-van-bang-quyet-dinh',
+		name: 'Sổ văn bằng & Quyết định',
+		component: './Nguoi1_SoVanBang_QuyetDinh',
+		icon: 'FileTextOutlined',
+	},
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',

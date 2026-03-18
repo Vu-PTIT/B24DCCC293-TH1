@@ -20,6 +20,16 @@ export default {
   'GET /api/quan-ly-van-bang/quyet-dinh': (req: Request, res: Response) => {
     res.send({ data: quyetDinh });
   },
+  'POST /api/quan-ly-van-bang/so-van-bang': (req: Request, res: Response) => {
+    const newSo = { ...req.body, id: `so_${Date.now()}` };
+    soVanBang.push(newSo);
+    res.send({ success: true, data: newSo });
+  },
+  'POST /api/quan-ly-van-bang/quyet-dinh': (req: Request, res: Response) => {
+    const newQd = { ...req.body, id: `qd_${Date.now()}` };
+    quyetDinh.push(newQd);
+    res.send({ success: true, data: newQd });
+  },
   'GET /api/quan-ly-van-bang/cau-hinh-bieu-mau': (req: Request, res: Response) => {
     res.send({ data: cauHinhBieuMau });
   },
