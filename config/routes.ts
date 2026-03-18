@@ -62,6 +62,19 @@
 		icon: 'FileTextOutlined',
 	},
 
+	{
+		path: '/Nguoi3_ThongTinVanBang',
+		name: 'Quản lý văn bằng',
+		icon: 'profile',
+		routes: [
+			{
+				path: '/Nguoi3_ThongTinVanBang/thong-tin',
+				name: 'Thông tin văn bằng',
+				component: '@/pages/Nguoi3_ThongTinVanBang',
+			},
+		],
+	},
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
