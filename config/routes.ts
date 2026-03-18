@@ -1,4 +1,4 @@
-﻿export default [
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -60,6 +60,13 @@
 		name: 'Sổ văn bằng & Quyết định',
 		component: './Nguoi1_SoVanBang_QuyetDinh',
 		icon: 'FileTextOutlined',
+	},
+
+	{
+		path: '/nguoi3-thong-tin-van-bang',
+		name: 'Thông tin văn bằng',
+		component: './Nguoi3_ThongTinVanBang',
+		icon: 'SolutionOutlined',
 	},
 
 	// DANH MUC HE THONG
