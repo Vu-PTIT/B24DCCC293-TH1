@@ -48,6 +48,12 @@
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
 	},
+	{
+		path: '/cau-hinh-bieu-mau',
+		name: 'Cấu hình biểu mẫu',
+		component: './Nguoi2_CauHinhBieuMau',
+		icon: 'FormOutlined',
+	},
 
 	{
 		path: '/nguoi1-so-van-bang-quyet-dinh',
