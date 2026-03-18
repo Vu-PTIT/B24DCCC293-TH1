@@ -175,4 +175,23 @@ export default {
 		vanBangList = vanBangList.filter((item) => item.id !== req.params.id && item._id !== req.params.id);
 		res.send({ data: true });
 	},
+
+	// Tra Cuu
+	'GET /api/quan-ly-van-bang/search': (req: Request, res: Response) => {
+		const { soHieuVanBang, soVaoSo, maSinhVien, hoTen, ngaySinh } = req.query;
+		const results = vanBangList.filter((item) => {
+			let match = true;
+			if (soHieuVanBang && !item.soHieuVanBang.includes(soHieuVanBang)) match = false;
+			if (soVaoSo && item.soVaoSo.toString() !== soVaoSo) match = false;
+			if (maSinhVien && !item.maSinhVien.includes(maSinhVien)) match = false;
+			if (hoTen && !item.hoTen.toLowerCase().includes((hoTen as string).toLowerCase())) match = false;
+			if (ngaySinh && item.ngaySinh !== ngaySinh) match = false;
+			return match;
+		});
+		res.send({ data: results });
+	},
+	'POST /api/quan-ly-van-bang/record-tra-cuu': (req: Request, res: Response) => {
+		// Simulate recording search count
+		res.send({ success: true });
+	},
 };

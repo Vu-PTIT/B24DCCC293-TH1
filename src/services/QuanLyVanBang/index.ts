@@ -17,5 +17,11 @@ export namespace QuanLyVanBangAPI {
     return axios.post('/api/quan-ly-van-bang/quyet-dinh', data);
   }
 
-  // Có thể thêm PUT/DELETE nếu cần
+  export async function searchVanBang(params: any) {
+    return axios.get('/api/quan-ly-van-bang/search', { params });
+  }
+
+  export async function recordTraCuu(idQuyetDinh: string) {
+    return axios.post('/api/quan-ly-van-bang/record-tra-cuu', { idQuyetDinh });
+  }
 }

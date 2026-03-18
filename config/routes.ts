@@ -68,6 +68,12 @@ export default [
 		component: './Nguoi3_ThongTinVanBang',
 		icon: 'SolutionOutlined',
 	},
+	{
+		path: '/nguoi4-tra-cuu-van-bang',
+		name: 'Tra cứu văn bằng',
+		component: './Nguoi4_TraCuuVienBang',
+		icon: 'SearchOutlined',
+	},
 
 	// DANH MUC HE THONG
 	// {
