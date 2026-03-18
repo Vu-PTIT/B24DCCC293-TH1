@@ -48,6 +48,12 @@
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
 	},
+	{
+		path: '/cau-hinh-bieu-mau',
+		name: 'Cấu hình biểu mẫu',
+		component: './Nguoi2_CauHinhBieuMau',
+		icon: 'FormOutlined',
+	},
 
 	// DANH MUC HE THONG
 	// {
