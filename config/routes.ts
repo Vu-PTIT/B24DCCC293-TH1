@@ -1,4 +1,4 @@
-﻿export default [
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -47,6 +47,32 @@
 		name: 'Todo List',
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
+	},
+
+	// --- MODULES FOR 4 DEVS ---
+	{
+		path: '/quan-ly-clb',
+		name: 'Quản lý Câu lạc bộ',
+		component: './QuanLyCauLacBo',
+		icon: 'TeamOutlined',
+	},
+	{
+		path: '/quan-ly-don',
+		name: 'Quản lý Đơn đăng ký',
+		component: './QuanLyDonDangKy',
+		icon: 'FileProtectOutlined',
+	},
+	{
+		path: '/quan-ly-thanh-vien',
+		name: 'Quản lý Thành viên',
+		component: './QuanLyThanhVien',
+		icon: 'UsergroupAddOutlined',
+	},
+	{
+		path: '/thong-ke',
+		name: 'Báo cáo Thống kê',
+		component: './BaocaoThongKe',
+		icon: 'BarChartOutlined',
 	},
 
 	// DANH MUC HE THONG
