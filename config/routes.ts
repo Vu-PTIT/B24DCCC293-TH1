@@ -1,4 +1,4 @@
-﻿export default [
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -47,6 +47,43 @@
 		name: 'Todo List',
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
+	},
+
+	// TRAVEL APPLICATION MODULES
+	{
+		path: '/explore',
+		name: 'Khám phá',
+		component: './Explore',
+		icon: 'CompassOutlined',
+	},
+	{
+		path: '/itinerary',
+		name: 'Lịch trình',
+		component: './Itinerary',
+		icon: 'CalendarOutlined',
+	},
+	{
+		path: '/budget',
+		name: 'Ngân sách',
+		component: './Budget',
+		icon: 'DollarOutlined',
+	},
+	{
+		name: 'Quản trị',
+		path: '/admin',
+		icon: 'SettingOutlined',
+		routes: [
+			{
+				name: 'Quản lý điểm đến',
+				path: '/admin/destinations',
+				component: './Admin/Destinations',
+			},
+			{
+				name: 'Thống kê',
+				path: '/admin/statistics',
+				component: './Admin/Statistics',
+			},
+		],
 	},
 
 	// DANH MUC HE THONG
