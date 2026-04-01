@@ -1,23 +1,7 @@
 @import '~antd/es/style/themes/default.less';
-@import '../../../styles/_variable.less';
+@import '../../styles/_variable.less';
 
-.destination-page {
-	padding: 8px;
-
-	.page-header {
-		margin-bottom: 16px;
-
-		h1 {
-			margin: 0;
-			font-size: 28px;
-		}
-
-		p {
-			margin: 8px 0 0;
-			color: #4b5563;
-		}
-	}
-
+.explore-page {
 	.filter-card {
 		margin-bottom: 16px;
 	}
@@ -113,7 +97,7 @@
 }
 
 @media (max-width: @screen-lg) {
-	.destination-page {
+	.explore-page {
 		.filter-grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
@@ -121,13 +105,7 @@
 }
 
 @media (max-width: @screen-sm) {
-	.destination-page {
-		.page-header {
-			h1 {
-				font-size: 24px;
-			}
-		}
-
+	.explore-page {
 		.filter-top {
 			flex-direction: column;
 			align-items: flex-start;
