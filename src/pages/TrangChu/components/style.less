@@ -1,29 +1,106 @@
 @import '~antd/es/style/themes/default.less';
 @import '../../../styles/_variable.less';
 
-.home-welcome {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	text-align: center;
+.destination-page {
+	padding: 8px;
 
-	h1 {
-		font-weight: 300;
-		font-size: 38px;
+	.filter-card {
+		margin-bottom: 16px;
+	}
 
-		@media (max-width: @screen-xs) {
-			font-size: 26px;
+	.filter-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.filter-item {
+		.filter-label {
+			margin: 0 0 8px;
+			color: #1f2937;
+			font-weight: 600;
+		}
+
+		.filter-value {
+			margin: 8px 0 0;
+			color: #4b5563;
+			font-size: 13px;
+		}
+
+		.ant-select {
+			width: 100%;
 		}
 	}
 
-	h2 {
-		font-weight: 700;
-		font-size: 20px;
+	.destination-card {
+		height: 100%;
 
-		@media (max-width: @screen-xs) {
+		.ant-card-body {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+	}
+
+	.destination-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+	}
+
+	.destination-header {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		justify-content: space-between;
+
+		h3 {
+			margin: 0;
 			font-size: 18px;
+			line-height: 1.4;
+		}
+	}
+
+	.destination-location {
+		margin: 0;
+		color: #6b7280;
+	}
+
+	.destination-rating {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+
+		span {
+			color: #4b5563;
+			font-size: 13px;
+		}
+	}
+
+	.destination-price {
+		margin: 0;
+		color: #14532d;
+		font-weight: 700;
+		font-size: 16px;
+	}
+}
+
+@media (max-width: @screen-lg) {
+	.destination-page {
+		.filter-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+}
+
+@media (max-width: @screen-sm) {
+	.destination-page {
+		.filter-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.destination-image {
+			height: 180px;
 		}
 	}
 }
