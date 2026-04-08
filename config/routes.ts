@@ -1,4 +1,4 @@
-﻿export default [
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -47,6 +47,33 @@
 		name: 'Todo List',
 		component: './TodoList',
 		icon: 'OrderedListOutlined',
+	},
+	{
+		path: '/group-task',
+		name: 'Quản lý công việc',
+		icon: 'ProjectOutlined',
+		routes: [
+			{
+				path: '/group-task/login',
+				name: 'Đăng nhập (Thành viên 1)',
+				component: './GroupTask/Login',
+			},
+			{
+				path: '/group-task/list',
+				name: 'Danh sách công việc (Thành viên 2)',
+				component: './GroupTask/TaskList',
+			},
+			{
+				path: '/group-task/filter',
+				name: 'Bộ lọc & Tìm kiếm (Thành viên 3)',
+				component: './GroupTask/TaskFilter',
+			},
+			{
+				path: '/group-task/calendar',
+				name: 'Lịch & Thống kê (Thành viên 4)',
+				component: './GroupTask/TaskAnalytics',
+			},
+		],
 	},
 
 	// DANH MUC HE THONG
