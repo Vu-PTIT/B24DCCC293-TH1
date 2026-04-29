@@ -60,8 +60,17 @@ const PostTableComponent: React.FC<PostTableComponentProps> = ({ posts, onEdit, 
 			title: 'Hanh dong',
 			key: PostColumnKey.ACTION,
 			render: (_: unknown, record: Post) => (
-				<Space size='middle' direction={isMobile ? 'vertical' : 'horizontal'} style={{ width: isMobile ? '100%' : 'auto' }}>
-					<Button type='link' icon={<EditOutlined />} onClick={() => onEdit(record)} style={{ width: isMobile ? '100%' : 'auto' }}>
+				<Space
+					size='middle'
+					direction={isMobile ? 'vertical' : 'horizontal'}
+					style={{ width: isMobile ? '100%' : 'auto' }}
+				>
+					<Button
+						type='link'
+						icon={<EditOutlined />}
+						onClick={() => onEdit(record)}
+						style={{ width: isMobile ? '100%' : 'auto' }}
+					>
 						Sua
 					</Button>
 					<Popconfirm

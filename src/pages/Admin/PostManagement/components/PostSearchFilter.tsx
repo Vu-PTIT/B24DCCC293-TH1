@@ -9,7 +9,12 @@ interface PostSearchFilterProps {
 	onStatusChange: (value: PostStatus | 'ALL') => void;
 }
 
-const PostSearchFilter: React.FC<PostSearchFilterProps> = ({ searchTitle, onSearchChange, statusFilter, onStatusChange }) => {
+const PostSearchFilter: React.FC<PostSearchFilterProps> = ({
+	searchTitle,
+	onSearchChange,
+	statusFilter,
+	onStatusChange,
+}) => {
 	const isMobile = window.innerWidth < 768;
 
 	return (

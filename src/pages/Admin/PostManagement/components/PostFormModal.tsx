@@ -20,7 +20,14 @@ interface PostFormModalProps {
 	tagOptions: Array<{ label: string; value: string }>;
 }
 
-const PostFormModal: React.FC<PostFormModalProps> = ({ visible, form, onCancel, onSubmit, editingPost, tagOptions }) => {
+const PostFormModal: React.FC<PostFormModalProps> = ({
+	visible,
+	form,
+	onCancel,
+	onSubmit,
+	editingPost,
+	tagOptions,
+}) => {
 	const isMobile = window.innerWidth < 768;
 
 	return (

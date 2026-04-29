@@ -24,7 +24,12 @@ const PostActionBar: React.FC<PostActionBarProps> = ({ onAddClick }) => {
 			<Title level={4} style={{ margin: 0, minWidth: 0 }}>
 				Quan ly bai viet
 			</Title>
-			<Button type='primary' icon={<PlusOutlined />} onClick={onAddClick} style={{ width: window.innerWidth < 768 ? '100%' : 'auto' }}>
+			<Button
+				type='primary'
+				icon={<PlusOutlined />}
+				onClick={onAddClick}
+				style={{ width: window.innerWidth < 768 ? '100%' : 'auto' }}
+			>
 				Them bai viet
 			</Button>
 		</div>
