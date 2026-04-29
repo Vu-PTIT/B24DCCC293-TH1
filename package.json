@@ -24,7 +24,7 @@
     "openapi": "umi openapi",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
-    "start": "cross-env NODE_OPTIONS=--max-old-space-size=4096 node scripts/start-dev.js",
+    "start": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --openssl-legacy-provider\" node scripts/start-dev.js",
     "start:dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 REACT_APP_ENV=dev MOCK=none node scripts/start-dev.js",
     "start:no-mock": "cross-env NODE_OPTIONS=--max-old-space-size=4096 MOCK=none node scripts/start-dev.js",
     "start:no-ui": "cross-env NODE_OPTIONS=--max-old-space-size=4096 UMI_UI=none node scripts/start-dev.js",
