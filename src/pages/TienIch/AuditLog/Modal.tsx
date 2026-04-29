@@ -1,7 +1,7 @@
 import TableBase from '@/components/Table';
 import { EOperatorType } from '@/components/Table/constant';
 import type { IColumn } from '@/components/Table/typing';
-import type { AuditLog } from '@/services/TienIch/AuditLog/typing';
+import { AuditLog } from '@/services/TienIch/AuditLog/typing';
 import { Button, Card, Descriptions, Modal } from 'antd';
 import moment from 'moment';
 import { useState } from 'react';
@@ -50,10 +50,10 @@ const ModalAuditLog = (props: {
 	});
 
 	const columns: IColumn<AuditLog.IRecord>[] = [
-		{ title: 'TT', dataIndex: 'index', align: 'center', width: 60, onCell },
+		{ title: 'TT', dataIndex: AuditLog.ColumnKey.INDEX, align: 'center', width: 60, onCell },
 		{
 			title: 'Mã người dùng',
-			dataIndex: 'uCode',
+			dataIndex: AuditLog.ColumnKey.UCODE,
 			align: 'center',
 			width: 120,
 			filterType: 'string',
@@ -62,14 +62,14 @@ const ModalAuditLog = (props: {
 		},
 		{
 			title: 'Họ tên',
-			dataIndex: 'uName',
+			dataIndex: AuditLog.ColumnKey.UNAME,
 			width: 160,
 			filterType: 'string',
 			onCell,
 		},
 		{
 			title: 'Hành động',
-			dataIndex: 'action',
+			dataIndex: AuditLog.ColumnKey.ACTION,
 			width: 180,
 			filterType: 'select',
 			filterData: Object.keys(actions).map((i) => ({ label: actions[i], value: i })),
@@ -78,7 +78,7 @@ const ModalAuditLog = (props: {
 		},
 		{
 			title: 'Thời gian',
-			dataIndex: 'createdAt',
+			dataIndex: AuditLog.ColumnKey.CREATED_AT,
 			align: 'center',
 			width: 150,
 			filterType: 'datetime',
@@ -86,7 +86,8 @@ const ModalAuditLog = (props: {
 			render: (val) => val && moment(val).format('HH:mm:ss, DD/MM/YYYY'),
 			onCell,
 		},
-		// {
+	];
+	// {
 		// 	title: 'Thao tác',
 		// 	align: 'center',
 		// 	width: 90,
@@ -109,7 +110,7 @@ const ModalAuditLog = (props: {
 		// 		</>
 		// 	),
 		// },
-	];
+	// ];
 
 	return (
 		<Modal title={title} visible={visible} onCancel={() => setVisible(false)} footer={null} width={1200}>

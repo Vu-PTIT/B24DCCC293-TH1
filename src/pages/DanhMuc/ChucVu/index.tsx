@@ -12,7 +12,7 @@ const ChucVuPage = () => {
   const columns: IColumn<ChucVu.IRecord>[] = [
     {
       title: 'Mã',
-      dataIndex: 'ma',
+      dataIndex: ChucVu.ColumnKey.MA,
       width: 80,
       filterType: 'select',
       filterData: ['M01', 'M02', 'M03'],
@@ -20,14 +20,14 @@ const ChucVuPage = () => {
     },
     {
       title: 'Tên chức vụ',
-      dataIndex: 'ten',
+      dataIndex: ChucVu.ColumnKey.TEN,
       width: 250,
       filterType: 'string',
       sortable: true,
     },
     {
       title: 'Ngày tạo',
-      dataIndex: 'createdAt',
+      dataIndex: ChucVu.ColumnKey.CREATED_AT,
       align: 'center',
       width: 120,
       filterType: 'datetime',

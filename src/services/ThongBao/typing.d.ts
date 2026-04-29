@@ -105,4 +105,29 @@ declare module ThongBao {
 		pathWeb?: string;
 		phanHe?: ESourceTypeNotification;
 	} & Record<string, any>;
+
+	export enum ColumnKey {
+		SENDER_NAME = 'senderName',
+		TITLE = 'title',
+		ID_TAG_EMAIL = 'idTagEmail',
+		DESCRIPTION = 'description',
+		CONTENT = 'content',
+		RECEIVER_LIST = 'receiverList',
+		CREATED_AT = 'createdAt',
+		ACTION = 'action',
+	}
+
+	export enum ReceiverColumnKey {
+		USERNAME = 'username',
+		FULLNAME = 'fullname',
+		READ = 'read',
+	}
+
+	export enum UserColumnKey {
+		CODE = 'code',
+		USERNAME = 'username',
+		FULLNAME = 'fullname',
+		TRANG_THAI_HOC = 'trangThaiHoc',
+		TRANG_THAI = 'trangThai',
+	}
 }

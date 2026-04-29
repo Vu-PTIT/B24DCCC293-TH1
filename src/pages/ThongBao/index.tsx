@@ -4,7 +4,7 @@ import ButtonExtend from '@/components/Table/ButtonExtend';
 import { EOperatorType } from '@/components/Table/constant';
 import { type IColumn } from '@/components/Table/typing';
 import { NotificationType } from '@/services/ThongBao/constant';
-import { type ThongBao } from '@/services/ThongBao/typing';
+import { ThongBao } from '@/services/ThongBao/typing';
 import { DeleteOutlined, EyeOutlined, LeftOutlined, PlusCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, DatePicker, Modal, Popconfirm, Segmented, Space, Tabs } from 'antd';
 import moment from 'moment';
@@ -76,14 +76,14 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 	const columns: IColumn<ThongBao.IRecord>[] = [
 		{
 			title: 'Người gửi',
-			dataIndex: 'senderName',
+			dataIndex: ThongBao.ColumnKey.SENDER_NAME,
 			width: 150,
 			filterType: 'string',
 			onCell,
 		},
 		{
 			title: 'Tiêu đề',
-			dataIndex: 'title',
+			dataIndex: ThongBao.ColumnKey.TITLE,
 			width: 200,
 			filterType: 'string',
 			onCell,
@@ -102,7 +102,7 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 		},
 		{
 			title: 'Nhãn dán',
-			dataIndex: 'idTagEmail',
+			dataIndex: ThongBao.ColumnKey.ID_TAG_EMAIL,
 			width: 150,
 			render: (val, recordVal) => recordVal?.tagEmail?.ten,
 			onCell,
@@ -110,7 +110,7 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 		},
 		{
 			title: 'Mô tả',
-			dataIndex: 'description',
+			dataIndex: ThongBao.ColumnKey.DESCRIPTION,
 			width: 280,
 			filterType: 'string',
 			onCell,
@@ -118,6 +118,7 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 		},
 		{
 			title: 'Danh sách người nhận',
+			key: ThongBao.ColumnKey.RECEIVER_LIST,
 			align: 'center',
 			width: 90,
 			render: (val, rec) => (
@@ -134,7 +135,7 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 		},
 		{
 			title: 'Thời gian gửi',
-			dataIndex: 'createdAt',
+			dataIndex: ThongBao.ColumnKey.CREATED_AT,
 			width: 120,
 			align: 'center',
 			filterType: 'datetime',
@@ -144,6 +145,7 @@ const ThongBaoPage = (props: { notiType: NotificationType }) => {
 		},
 		{
 			title: 'Thao tác',
+			key: ThongBao.ColumnKey.ACTION,
 			align: 'center',
 			width: 90,
 			fixed: 'right',

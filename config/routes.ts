@@ -1,4 +1,4 @@
-﻿export default [
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -85,8 +85,53 @@
 		layout: false,
 		hideInMenu: true,
 	},
+	// BLOG APPLICATION
+	{
+		name: 'Blog',
+		path: '/blog',
+		icon: 'ReadOutlined',
+		routes: [
+			{
+				path: '/blog',
+				name: 'Feed',
+				component: './Blog/Feed',
+				hideInMenu: true,
+			},
+			{
+				path: '/blog/:slug',
+				name: 'Detail',
+				component: './Blog/Detail',
+				hideInMenu: true,
+			},
+		],
+	},
+	{
+		name: 'About',
+		path: '/about',
+		icon: 'UserOutlined',
+		component: './About',
+	},
+	{
+		name: 'Blog Admin',
+		path: '/admin',
+		icon: 'SettingOutlined',
+		routes: [
+			{
+				path: '/admin/posts',
+				name: 'Manage Posts',
+				component: './Admin/PostManagement',
+			},
+			{
+				path: '/admin/tags',
+				name: 'Manage Tags',
+				component: './Admin/TagManagement',
+			},
+		],
+	},
+
 	{
 		path: '/',
+		redirect: '/blog',
 	},
 	{
 		path: '/403',

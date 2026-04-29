@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useModel } from 'umi';
 import FormRandomUser from './Form';
 
-const RandomUser = () => {
+const RandomUserPage = () => {
 	const { data, getDataUser, setRow, isEdit, setVisible, setIsEdit, visible } = useModel('randomuser');
 
 	useEffect(() => {
@@ -14,18 +14,19 @@ const RandomUser = () => {
 	const columns: IColumn<RandomUser.Record>[] = [
 		{
 			title: 'Address',
-			dataIndex: 'address',
-			key: 'name',
+			dataIndex: RandomUser.ColumnKey.ADDRESS,
+			key: RandomUser.ColumnKey.ADDRESS,
 			width: 200,
 		},
 		{
 			title: 'Balance',
-			dataIndex: 'balance',
-			key: 'age',
+			dataIndex: RandomUser.ColumnKey.BALANCE,
+			key: RandomUser.ColumnKey.BALANCE,
 			width: 100,
 		},
 		{
 			title: 'Action',
+			key: RandomUser.ColumnKey.ACTION,
 			width: 200,
 			align: 'center',
 			render: (record) => {
@@ -88,4 +89,4 @@ const RandomUser = () => {
 	);
 };
 
-export default RandomUser;
+export default RandomUserPage;

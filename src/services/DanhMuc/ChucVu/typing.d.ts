@@ -6,4 +6,11 @@ declare module ChucVu {
     createdAt?: string;
     updatedAt?: string;
   }
+
+  export enum ColumnKey {
+    MA = 'ma',
+    TEN = 'ten',
+    CREATED_AT = 'createdAt',
+    ACTION = 'action',
+  }
 }

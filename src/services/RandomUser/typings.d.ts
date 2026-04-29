@@ -7,4 +7,10 @@ declare module RandomUser {
 		created: string;
 		balance: string;
 	}
+
+	export enum ColumnKey {
+		ADDRESS = 'address',
+		BALANCE = 'balance',
+		ACTION = 'action',
+	}
 }

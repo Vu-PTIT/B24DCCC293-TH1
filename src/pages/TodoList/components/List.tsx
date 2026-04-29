@@ -21,14 +21,22 @@ interface TodoListTableProps {
     onToggleStatus: (id: string) => void;
 }
 
+export enum TodoListColumnKey {
+    TITLE = 'title',
+    DESCRIPTION = 'description',
+    PRIORITY = 'priority',
+    COMPLETED = 'completed',
+    ACTION = 'action',
+}
+
 const TodoListTable: React.FC<TodoListTableProps> = ({ data, onEdit, onDelete, onToggleStatus }) => {
 
     // Định nghĩa các cột cho bảng
     const columns = [
         {
             title: 'Tiêu đề',
-            dataIndex: 'title',
-            key: 'title',
+            dataIndex: TodoListColumnKey.TITLE,
+            key: TodoListColumnKey.TITLE,
             render: (text: string, record: TodoItem) => (
                 <span style={{ textDecoration: record.completed ? 'line-through' : 'none', color: record.completed ? '#999' : 'inherit' }}>
                     {text}
@@ -37,14 +45,14 @@ const TodoListTable: React.FC<TodoListTableProps> = ({ data, onEdit, onDelete, o
         },
         {
             title: 'Mô tả',
-            dataIndex: 'description',
-            key: 'description',
+            dataIndex: TodoListColumnKey.DESCRIPTION,
+            key: TodoListColumnKey.DESCRIPTION,
             ellipsis: true,
         },
         {
             title: 'Ưu tiên',
-            dataIndex: 'priority',
-            key: 'priority',
+            dataIndex: TodoListColumnKey.PRIORITY,
+            key: TodoListColumnKey.PRIORITY,
             width: 100,
             render: (priority: string) => {
                 let color = 'blue';
@@ -61,8 +69,8 @@ const TodoListTable: React.FC<TodoListTableProps> = ({ data, onEdit, onDelete, o
         },
         {
             title: 'Trạng thái',
-            dataIndex: 'completed',
-            key: 'completed',
+            dataIndex: TodoListColumnKey.COMPLETED,
+            key: TodoListColumnKey.COMPLETED,
             width: 120,
             render: (completed: boolean, record: TodoItem) => (
                 <Button
@@ -77,7 +85,7 @@ const TodoListTable: React.FC<TodoListTableProps> = ({ data, onEdit, onDelete, o
         },
         {
             title: 'Hành động',
-            key: 'action',
+            key: TodoListColumnKey.ACTION,
             width: 150,
             render: (_: any, record: TodoItem) => (
                 <Space size="middle">

@@ -1,6 +1,6 @@
 import TableBase from '@/components/Table';
 import type { IColumn } from '@/components/Table/typing';
-import type { ThongBao } from '@/services/ThongBao/typing';
+import { ThongBao } from '@/services/ThongBao/typing';
 import { Select, Tag } from 'antd';
 import { useModel } from 'umi';
 import { thongKeNotificationNguoiNhan } from '@/services/ThongBao';
@@ -29,19 +29,19 @@ const TableReceiverThongBao = (props: { record?: ThongBao.IRecord }) => {
 	const columns: IColumn<ThongBao.TReceiver>[] = [
 		{
 			title: 'Mã giảng viên / sinh viên',
-			dataIndex: 'username',
+			dataIndex: ThongBao.ReceiverColumnKey.USERNAME,
 			width: 150,
 			filterType: 'string',
 		},
 		{
 			title: 'Họ tên',
-			dataIndex: 'fullname',
+			dataIndex: ThongBao.ReceiverColumnKey.FULLNAME,
 			width: 180,
 			filterType: 'string',
 		},
 		{
 			title: 'Trạng thái',
-			dataIndex: 'read',
+			dataIndex: ThongBao.ReceiverColumnKey.READ,
 			width: 100,
 			align: 'center',
 			render: (val) => {

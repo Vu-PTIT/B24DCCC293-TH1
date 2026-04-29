@@ -2,7 +2,7 @@ import TableBase from '@/components/Table';
 import ButtonExtend from '@/components/Table/ButtonExtend';
 import { type IColumn } from '@/components/Table/typing';
 import { EReceiverType, EVaiTroKhaoSat } from '@/services/ThongBao/constant';
-import { type ThongBao } from '@/services/ThongBao/typing';
+import { ThongBao } from '@/services/ThongBao/typing';
 import { ImportOutlined } from '@ant-design/icons';
 import { Checkbox, Col, Empty, Row } from 'antd';
 import _ from 'lodash';
@@ -93,7 +93,7 @@ const TableSelectUser = (props: {
 	const columns: IColumn<ThongBao.IUser>[] = [
 		{
 			title: type === EVaiTroKhaoSat.SINH_VIEN ? 'Mã sinh viên' : 'Mã cán bộ',
-			dataIndex: 'code',
+			dataIndex: ThongBao.UserColumnKey.CODE,
 			filterType: 'string',
 			width: 80,
 			render: (val, rec) => rec?.username,
@@ -101,7 +101,7 @@ const TableSelectUser = (props: {
 		},
 		{
 			title: 'Họ tên',
-			dataIndex: 'fullname',
+			dataIndex: ThongBao.UserColumnKey.FULLNAME,
 			filterType: 'string',
 			width: 180,
 			onCell,
@@ -109,7 +109,7 @@ const TableSelectUser = (props: {
 		type === EVaiTroKhaoSat.SINH_VIEN
 			? {
 					title: 'Trạng thái học',
-					dataIndex: 'trangThaiHoc',
+					dataIndex: ThongBao.UserColumnKey.TRANG_THAI_HOC,
 					align: 'center',
 					width: 120,
 					// filterType: 'select',
@@ -119,7 +119,7 @@ const TableSelectUser = (props: {
 			  }
 			: {
 					title: 'Trạng thái',
-					dataIndex: 'trangThai',
+					dataIndex: ThongBao.UserColumnKey.TRANG_THAI,
 					align: 'center',
 					width: 120,
 					// filterType: 'select',

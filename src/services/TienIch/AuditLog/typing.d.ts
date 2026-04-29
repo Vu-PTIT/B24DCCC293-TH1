@@ -19,4 +19,11 @@ declare module AuditLog {
 		response: any;
 		createdAt: string;
 	}
+	export enum ColumnKey {
+		INDEX = 'index',
+		UCODE = 'uCode',
+		UNAME = 'uName',
+		ACTION = 'action',
+		CREATED_AT = 'createdAt',
+	}
 }

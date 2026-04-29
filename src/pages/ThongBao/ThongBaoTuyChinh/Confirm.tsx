@@ -3,7 +3,7 @@ import TableStaticData from '@/components/Table/TableStaticData';
 import type { IColumn } from '@/components/Table/typing';
 import { AppModules } from '@/services/base/constant';
 import type { NotificationType } from '@/services/ThongBao/constant';
-import type { ThongBao } from '@/services/ThongBao/typing';
+import { ThongBao } from '@/services/ThongBao/typing';
 import { currentRole } from '@/utils/ip';
 import { Button } from 'antd';
 import moment from 'moment';
@@ -37,7 +37,7 @@ const ConfirmThongBaoTuyChinh = (props: { getData: () => void; type: Notificatio
 	const columns: IColumn<ThongBao.IRecord>[] = [
 		{
 			title: 'Tiêu đề',
-			dataIndex: 'title',
+			dataIndex: ThongBao.ColumnKey.TITLE,
 			width: 200,
 			render: (val, rec) => <ExpandText>{val}</ExpandText>,
 		},
@@ -48,7 +48,7 @@ const ConfirmThongBaoTuyChinh = (props: { getData: () => void; type: Notificatio
 		},
 		{
 			title: 'Nội dung',
-			dataIndex: 'content',
+			dataIndex: ThongBao.ColumnKey.CONTENT,
 			width: 280,
 			render: (val) => (
 				<ExpandText>
@@ -58,7 +58,7 @@ const ConfirmThongBaoTuyChinh = (props: { getData: () => void; type: Notificatio
 		},
 		{
 			title: 'Thời gian gửi',
-			dataIndex: 'createdAt',
+			dataIndex: ThongBao.ColumnKey.CREATED_AT,
 			width: 120,
 			align: 'center',
 			render: (val) => moment(val).format('HH:mm DD/MM/YYYY'),
