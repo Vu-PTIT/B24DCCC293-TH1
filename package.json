@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env NODE_OPTIONS=--max-old-space-size=4096 ANALYZE=1 node scripts/build.js",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 node scripts/build.js",
-    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 npm run start:dev",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider umi dev",
     "push-rsync": "rsync -avzhe ssh --delete-before dist/ ubuntu@203.162.10.113:/var/www/slink.ptit.edu.vn/",
     "push-rsync-win": "rsync -avzh --chmod=755 --no-perms --delete-before dist/ ubuntu@203.162.10.113:/var/www/slink.ptit.edu.vn/",
     "deploy": "yarn build && yarn push-rsync",
