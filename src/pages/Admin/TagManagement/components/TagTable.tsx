@@ -16,10 +16,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onEdit, onDelete }) => {
       dataIndex: TagColumnKey.NAME,
       key: TagColumnKey.NAME,
       sorter: (a: Tag, b: Tag) => a.name.localeCompare(b.name),
-<<<<<<< HEAD
-=======
       render: (value: string) => <span style={{ fontWeight: 600 }}>{value}</span>,
->>>>>>> ccd7a019c41f09a5a16f95c67a87824c7c3daac4
     },
     {
       title: 'Số bài viết',
@@ -27,10 +24,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onEdit, onDelete }) => {
       key: TagColumnKey.POST_COUNT,
       sorter: (a: Tag, b: Tag) => a.postCount - b.postCount,
       width: 140,
-<<<<<<< HEAD
-=======
       align: 'center' as const,
->>>>>>> ccd7a019c41f09a5a16f95c67a87824c7c3daac4
     },
     {
       title: 'Hành động',
@@ -40,11 +34,6 @@ const TagTable: React.FC<TagTableProps> = ({ data, onEdit, onDelete }) => {
           <Button type="link" icon={<EditOutlined />} onClick={() => onEdit(record)}>
             Sửa
           </Button>
-<<<<<<< HEAD
-          <Button type="link" danger icon={<DeleteOutlined />} onClick={() => onDelete(record)}>
-            Xóa
-          </Button>
-=======
           <Popconfirm
             title={`Xóa thẻ "${record.name}"?`}
             okText="Xóa"
@@ -55,16 +44,12 @@ const TagTable: React.FC<TagTableProps> = ({ data, onEdit, onDelete }) => {
               Xóa
             </Button>
           </Popconfirm>
->>>>>>> ccd7a019c41f09a5a16f95c67a87824c7c3daac4
         </Space>
       ),
       width: 180,
     },
   ];
 
-<<<<<<< HEAD
-  return <Table columns={columns} dataSource={data} rowKey="id" pagination={{ pageSize: 8 }} />;
-=======
   return (
     <Table
       columns={columns}
@@ -76,7 +61,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onEdit, onDelete }) => {
       locale={{ emptyText: 'Không có thẻ phù hợp' }}
     />
   );
->>>>>>> ccd7a019c41f09a5a16f95c67a87824c7c3daac4
 };
 
 export default TagTable;
+

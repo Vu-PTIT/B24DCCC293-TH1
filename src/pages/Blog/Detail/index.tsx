@@ -1,47 +1,68 @@
-import React from 'react';
-import { Typography, Button, Divider, Space, Tag } from 'antd';
+import React, { useEffect, useMemo } from 'react';
+import { Button, Divider, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useParams, history } from 'umi';
 import { DeveloperRole } from '@/services/blog/typings';
 import { MOCK_POSTS } from '@/services/blog/mock';
-
-const { Title, Paragraph, Text } = Typography;
+import ReactMarkdown from 'react-markdown';
+import PostHeader from './components/PostHeader';
+import RelatedPosts from './components/RelatedPosts';
 
 const PostDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = MOCK_POSTS.find((p) => p.slug === slug);
 
+  // Auto-increment view count
+  useEffect(() => {
+    if (post) {
+      post.viewCount += 1;
+    }
+  }, [post]);
+
+  // Related posts: same tags, excluding current post
+  const relatedPosts = useMemo(() => {
+    if (!post) return [];
+    return MOCK_POSTS.filter(p => 
+      p.id !== post.id && 
+      p.tags.some(tag => post.tags.includes(tag))
+    ).slice(0, 3);
+  }, [post]);
+
+  if (!post) {
+    return (
+      <div style={{ padding: '48px', textAlign: 'center' }}>
+        <Empty description="Không tìm thấy bài viết" />
+        <Button onClick={() => history.push('/blog/feed')}>Quay lại danh sách</Button>
+      </div>
+    );
+  }
+
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '24px', background: '#fff' }}>
-      <Button icon={<ArrowLeftOutlined />} onClick={() => history.goBack()} style={{ marginBottom: '16px' }}>
-        Quay lại
-      </Button>
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '24px' }}>
+      <div style={{ background: '#fff', padding: '32px', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+        <Button 
+          icon={<ArrowLeftOutlined />} 
+          onClick={() => history.push('/blog/feed')} 
+          style={{ marginBottom: '24px' }}
+          type="text"
+        >
+          Quay lại danh sách
+        </Button>
 
-      {post ? (
-        <>
-          <Title>{post.title}</Title>
-          <Space style={{ marginBottom: '24px' }}>
-            <Text type="secondary">{new Date(post.createdAt).toLocaleDateString()}</Text>
-            <Divider type="vertical" />
-            <Text type="secondary">Tác giả: {post.author}</Text>
-          </Space>
+        <PostHeader post={post} />
 
-          <div style={{ marginBottom: '24px' }}>
-            {post.tags.map(tag => <Tag key={tag} color="blue">{tag}</Tag>)}
-          </div>
+        <Divider />
+        
+        <div className="markdown-content" style={{ fontSize: '16px', lineHeight: '1.8' }}>
+          <ReactMarkdown>{post.content}</ReactMarkdown>
+        </div>
 
-          <Divider />
-          
-          <Paragraph>
-            {/* Person 2: Render Markdown content here */}
-            {post.content}
-          </Paragraph>
-        </>
-      ) : (
-        <p>Không tìm thấy bài viết</p>
-      )}
+        <Divider />
 
-      <div style={{ marginTop: '48px', color: '#ccc', textAlign: 'right' }}>
+        <RelatedPosts posts={relatedPosts} />
+      </div>
+
+      <div style={{ marginTop: '48px', color: '#ccc', textAlign: 'right', fontSize: '12px' }}>
         Assigned to: {DeveloperRole.P2_UI_DETAIL}
       </div>
     </div>
